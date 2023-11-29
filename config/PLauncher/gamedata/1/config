@@ -1,0 +1,6 @@
+name: Gylt
+description: none
+command: flatpak run com.valvesoftware.Steam steam://rungameid/2206210
+top: 50
+bottom: 50
+size: 0

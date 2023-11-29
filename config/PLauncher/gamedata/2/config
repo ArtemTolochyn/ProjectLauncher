@@ -1,0 +1,6 @@
+name: CS GO
+description: none
+command: flatpak run com.valvesoftware.Steam steam://rungameid/730
+top: 61
+bottom: 50
+size: 68

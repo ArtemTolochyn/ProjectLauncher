@@ -1,0 +1,6 @@
+name: Little Nightmares
+description: none
+command: flatpak run com.valvesoftware.Steam steam://rungameid/424840
+top: 77
+bottom: 50
+size: 28

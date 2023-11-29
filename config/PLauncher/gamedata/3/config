@@ -1,0 +1,6 @@
+name: Brawlhala
+description: none
+command: flatpak run com.valvesoftware.Steam steam://rungameid/291550
+top: 76
+bottom: 50
+size: 33
