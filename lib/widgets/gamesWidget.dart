@@ -31,9 +31,9 @@ class _gamesWidgetState extends State<gamesWidget> with TickerProviderStateMixin
   {
     if (signal > 0)
     {
-      if (scroll <= 32.3.toVWLength.toPX( constraint: widget.screenSize.width, screenSize: widget.screenSize,) * (widget.gameList.length - 5))
+      if (scroll <= 32.2.toVWLength.toPX( constraint: widget.screenSize.width, screenSize: widget.screenSize,) * (widget.gameList.length - 4))
         {
-          scroll = scroll + 32.3.toVWLength.toPX( constraint: widget.screenSize.width, screenSize: widget.screenSize,);
+          scroll = scroll + 32.2.toVWLength.toPX( constraint: widget.screenSize.width, screenSize: widget.screenSize,);
           scrollController.animateTo(scroll, duration: const Duration(microseconds: 200000), curve: Curves.easeOut);
         }
     }
@@ -41,7 +41,7 @@ class _gamesWidgetState extends State<gamesWidget> with TickerProviderStateMixin
     {
       if (scroll >= 32.toVWLength.toPX( constraint: widget.screenSize.width, screenSize: widget.screenSize,))
       {
-        scroll = scroll - 32.3.toVWLength.toPX( constraint: widget.screenSize.width, screenSize: widget.screenSize,);
+        scroll = scroll - 32.2.toVWLength.toPX( constraint: widget.screenSize.width, screenSize: widget.screenSize,);
         scrollController.animateTo(scroll, duration: const Duration(microseconds: 200000), curve: Curves.easeOut);
       }
     }
