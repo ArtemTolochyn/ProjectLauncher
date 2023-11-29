@@ -38,3 +38,6 @@ cp -rf ./config/PLauncher ~/.config/
 - **UI**: 80%
 - **Games functional**: 70%
 - **Profile**: 0%
+
+## Social media
+- [Discord](https://discord.gg/zQfZehumeb)
