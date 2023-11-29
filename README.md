@@ -5,6 +5,10 @@
 
 Project Launcher is a Flutter-based launcher inspired by the design of Google Stadia, with a focus on design from Chromecast. Please note that this launcher is a work in progress, but you can download the source code and an early version to explore its features.
 
+# Screenshot
+![image 1](https://github.com/ArtemTolochyn/ProjectLauncher/assets/146871074/2e1ad905-45ae-4a96-89d6-ef37a6a991fb)
+
+
 ## Getting Started
 Follow these steps to build and run Project Launcher on your local Linux machine.
 
