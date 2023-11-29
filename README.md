@@ -30,7 +30,7 @@ flutter run --release
 **Launcher can`t generate config**
 - Install default config yet
 ```
-cp -rf ./config/Plauncher ~/.config/
+cp -rf ./config/PLauncher ~/.config/
 ```
 
 
