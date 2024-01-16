@@ -42,6 +42,7 @@ class _PlayPageState extends State<PlayPage> with TickerProviderStateMixin {
       opacityLaunch = 0;
     });
   }
+  
 
   @override
   void initState() {

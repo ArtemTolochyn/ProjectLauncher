@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late String theme;
   late GamesWidget games;
   late AnimationController animationController;
-  late Animation<double> tween;
 
   int selectedGame = -1;
 
@@ -102,6 +101,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+
     super.initState();
     initConfig();
     animationController = AnimationController(

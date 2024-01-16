@@ -37,9 +37,9 @@ class _GamesWidgetState extends State<GamesWidget> with TickerProviderStateMixin
 
   double scroll = 0;
 
-
-  @override
-  void initState() {
+  Future<void> animInit()
+  async {
+    await Future.delayed(const Duration(seconds: 1));
     animation = Tween<double>(
         begin: 15.toVWLength.toPX(
             constraint: widget.screenSize.width,
@@ -49,11 +49,26 @@ class _GamesWidgetState extends State<GamesWidget> with TickerProviderStateMixin
             constraint: widget.screenSize.width,
             screenSize: widget.screenSize
         )).animate(widget.animationController);
+  }
 
+  @override
+  void initState() {
+    super.initState();
+
+    animation = Tween<double>(
+        begin: 15.toVWLength.toPX(
+            constraint: widget.screenSize.width,
+            screenSize: widget.screenSize
+        ),
+        end: 1.toVWLength.toPX(
+            constraint: widget.screenSize.width,
+            screenSize: widget.screenSize
+        )).animate(widget.animationController);
     opacityAnimation =
         Tween<double>(begin: 0.0, end: 1.0).animate(widget.animationController);
 
-    super.initState();
+    animInit();
+
     scrollController = ScrollController();
   }
 
