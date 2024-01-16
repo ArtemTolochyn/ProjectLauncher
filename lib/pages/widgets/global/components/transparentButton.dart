@@ -1,14 +1,13 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
-export "package:project_launcher/widgets/components/editButton.dart" hide editButtonAsset;
+export 'package:project_launcher/pages/widgets/global/components/transparentButton.dart';
 
-class editButton extends StatelessWidget {
+class TransparentButton extends StatelessWidget {
   final double width;
   final String text;
   final VoidCallback onPressed;
   final EdgeInsets? margin;
-  const editButton({this.margin, required this.width, required this.text, required this.onPressed, super.key});
+  const TransparentButton({this.margin, required this.width, required this.text, required this.onPressed, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +17,23 @@ class editButton extends StatelessWidget {
       width: width,
       child: InkWell(
         onTap: onPressed,
-        child: _editButtonAsset(width, text),
+        child: _EditButtonAsset(width, text),
       ),
     );
   }
 }
 
 
-class _editButtonAsset extends StatefulWidget {
+class _EditButtonAsset extends StatefulWidget {
   final double width;
   final String text;
-  const _editButtonAsset( this.width, this.text, {super.key});
+  const _EditButtonAsset( this.width, this.text, {super.key});
 
   @override
-  State<_editButtonAsset> createState() => _editButtonAssetState();
+  State<_EditButtonAsset> createState() => _EditButtonAssetState();
 }
 
-class _editButtonAssetState extends State<_editButtonAsset> with TickerProviderStateMixin {
+class _EditButtonAssetState extends State<_EditButtonAsset> with TickerProviderStateMixin {
 
   bool status = false;
 
@@ -45,7 +44,7 @@ class _editButtonAssetState extends State<_editButtonAsset> with TickerProviderS
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40,
       width: widget.width,
       child: MouseRegion(

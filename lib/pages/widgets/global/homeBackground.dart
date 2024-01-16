@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:dimension/dimension.dart';
 
@@ -9,8 +8,7 @@ class HomeBackground extends StatefulWidget {
   final Size screenSize;
   final String config;
   final AnimationController animationController;
-  final Animation<double> homeBackgroundAnimation;
-  const HomeBackground(this.gameList, this.screenSize, this.config,  this.animationController, this.homeBackgroundAnimation, {super.key});
+  const HomeBackground(this.gameList, this.screenSize, this.config,  this.animationController, {super.key});
   @override
   State<HomeBackground> createState() => _HomeBackgroundState();
 }
@@ -21,8 +19,12 @@ class _HomeBackgroundState extends State<HomeBackground> with TickerProviderStat
   late Animation<double> logoAnimation;
   SizedBox homeWidget = const SizedBox();
 
+  late Animation<double> homeBackgroundAnimation;
+
   @override
   void initState() {
+    homeBackgroundAnimation = Tween<double>(begin: 1.0, end: 15).animate(widget.animationController);
+
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 8000)
     );
@@ -56,7 +58,7 @@ class _HomeBackgroundState extends State<HomeBackground> with TickerProviderStat
                   return Positioned(
                     left:
                     (100 * backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVWLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVWLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize) <= 100.toVWLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
@@ -68,12 +70,12 @@ class _HomeBackgroundState extends State<HomeBackground> with TickerProviderStat
                     50.toVWLength.toPX(constraint: widget.screenSize
                         .width, screenSize: widget.screenSize) - (100 *
                         backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVWLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVWLength.toPX(
                         constraint: widget.screenSize.width,
                         screenSize: widget.screenSize) / 2
                     ,
                     top: (100 * backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVHLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVHLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize) <= 100.toVHLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
@@ -85,12 +87,12 @@ class _HomeBackgroundState extends State<HomeBackground> with TickerProviderStat
                     50.toVHLength.toPX(constraint: widget.screenSize.width,
                         screenSize: widget.screenSize) - (100 *
                         backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVHLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVHLength.toPX(
                         constraint: widget.screenSize.width,
                         screenSize: widget.screenSize) / 2
                     ,
                     width: (100 * backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVWLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVWLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize) <= 100.toVWLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
@@ -99,12 +101,12 @@ class _HomeBackgroundState extends State<HomeBackground> with TickerProviderStat
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize):
                     (100 * backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVWLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVWLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize)
                     ,
                     height: (100 * backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVHLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVHLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize) <= 100.toVHLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
@@ -113,7 +115,7 @@ class _HomeBackgroundState extends State<HomeBackground> with TickerProviderStat
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize):
                     (100 * backgroundAnimation.value -
-                        widget.homeBackgroundAnimation.value / 2).toVHLength.toPX(
+                        homeBackgroundAnimation.value / 2).toVHLength.toPX(
                         constraint: widget.screenSize.width, screenSize: widget
                         .screenSize),
                     child: Image.file(
@@ -129,7 +131,7 @@ class _HomeBackgroundState extends State<HomeBackground> with TickerProviderStat
                 builder: (context, child) {
                   return Transform.scale(
                     scale: logoAnimation.value -
-                        (widget.homeBackgroundAnimation.value / 100) - 0.1
+                        (homeBackgroundAnimation.value / 100) - 0.1
                       ,
                     child: Transform.translate(
                         offset: Offset(-(50 - int.parse(widget.gameList[0][6])).toVWLength.toPX(

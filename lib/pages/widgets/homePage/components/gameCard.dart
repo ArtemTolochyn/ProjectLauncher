@@ -1,26 +1,26 @@
 import 'dart:io';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:dimension/dimension.dart';
 import 'package:project_launcher/pages/playPage.dart';
 
-import '../../main.dart';
-import '../../utils/gameController.dart';
+import '../../../../main.dart';
+import '../../../../utils/gameController.dart';
 
-
-class gameButton extends StatefulWidget {
+typedef void RemoveCallback(int foo);
+class GameCard extends StatefulWidget {
   final int id;
   final List gameList;
-  const gameButton(this.id, this.gameList);
+  final RemoveCallback enableRemove;
+  const GameCard(this.id, this.gameList, this.enableRemove, {super.key});
 
   @override
-  State<gameButton> createState() => _gameButtonState();
+  State<GameCard> createState() => _GameCardState();
 }
 
-class _gameButtonState extends State<gameButton> with TickerProviderStateMixin {
+class _GameCardState extends State<GameCard> with TickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> opacity;
-  GameController game = GameController();
+  GameController gameController = GameController();
 
   @override
   void initState() {
@@ -31,17 +31,15 @@ class _gameButtonState extends State<gameButton> with TickerProviderStateMixin {
     opacity = Tween<double>(begin: 0.0, end: 1.0).animate(animationController);
   }
 
-  play() async {
-    await game.playGame(widget.id);
-    Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const PlayPage(), transitionDuration: const Duration(seconds: 0),),);
-  }
-
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return InkWell(
+    return GestureDetector(
       onTap: () => {
-        play()
+        gameController.playGame(id: widget.id, context: context)
+      },
+      onSecondaryTap: () => {
+        widget.enableRemove(widget.id)
       },
       child: MouseRegion(
           onEnter: (details) {

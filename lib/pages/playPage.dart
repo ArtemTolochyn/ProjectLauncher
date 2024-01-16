@@ -1,13 +1,16 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:process_run/process_run.dart';
-import 'package:project_launcher/pages/gamesPage.dart';
+import 'package:project_launcher/pages/homePage.dart';
+import 'package:project_launcher/pages/widgets/global/components/logo.dart';
 import '../utils/gameController.dart';
-import '../widgets/components/editButton.dart';
-import '../widgets/homeBackground.dart';
+import 'widgets/global/components/transparentButton.dart';
+import 'widgets/global/homeBackground.dart';
 
 class PlayPage extends StatefulWidget {
-  const PlayPage({super.key});
+  GameController gameController;
+
+  PlayPage({super.key, required this.gameController});
 
   @override
   State<PlayPage> createState() => _PlayPageState();
@@ -63,17 +66,27 @@ class _PlayPageState extends State<PlayPage> with TickerProviderStateMixin {
     return Scaffold(
       body: Stack(
         children: [
-          HomeBackground(gameList, screenSize, config, animationController, homeBackgroundAnimation),
+
+          HomeBackground(gameList, screenSize, config, animationController),
+
           AnimatedContainer(
             color: Colors.black.withOpacity(opacityLaunch), duration: const Duration(microseconds: 1000000),
           ),
+
           Container(
             margin: const EdgeInsets.all(50),
             alignment: Alignment.bottomLeft,
-            child: editButton(
+            child: TransparentButton(
               width: 160,
               text: "Back to home",
-              onPressed: () {Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const GamesPage(), transitionDuration: const Duration(seconds: 0),),);},
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(pageBuilder: (_, __, ___) => HomePage(gameController: widget.gameController,),
+                    transitionDuration: const Duration(seconds: 0),
+                  ),
+                );
+                },
             ),
           )
         ],

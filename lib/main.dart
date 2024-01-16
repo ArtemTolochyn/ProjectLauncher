@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project_launcher/pages/gamesPage.dart';
+import 'package:project_launcher/pages/homePage.dart';
+import 'package:project_launcher/utils/gameController.dart';
 
 
 Future<void> main() async {
-  runApp(const MaterialApp(
-    home: GamesPage(),
+  GameController gameController = GameController();
+
+  runApp(MaterialApp(
+    home: HomePage(
+      gameController: gameController,
+    ),
   ));
 }

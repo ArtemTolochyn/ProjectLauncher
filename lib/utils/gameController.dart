@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:process_run/process_run.dart';
+
+import '../pages/playPage.dart';
 
 class GameController
 {
@@ -33,7 +36,7 @@ class GameController
               .readAsString()
               .then((value) async =>
           {
-            lines = await value.split("\n"),
+            lines = value.split("\n"),
             name = await lines[0].split(':')[1].trim(),
             description = await lines[1].split(':')[1].trim(),
             command = await lines[2].split(': ')[1].trim(),
@@ -52,12 +55,19 @@ class GameController
     return gameList;
   }
 
-  playGame(id) async
+  playGame({required int id, required context}) async
   {
     gameList = await getHistory();
     await File("$config/gamedata/history").readAsString().then((value) => File("$config/gamedata/history").writeAsString( '${gameList[id][1]}\n${value.replaceAll('\n${gameList[id][1]}', '').replaceAll('${gameList[id][1]}\n', '')}'));
     var shell = Shell();
     shell.run(gameList[id][4]);
+    Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+            pageBuilder: (_, __, ___) => PlayPage(gameController: this,),
+            transitionDuration: const Duration(seconds: 0)
+        )
+    );
     return;
   }
 
@@ -72,13 +82,21 @@ class GameController
       await File(backgroundPath).copy("$config/gamedata/${(maxID).toString()}/background.png");
       await File(logoPath).copy("$config/gamedata/${(maxID ).toString()}/logo.png");
       await File("$config/gamedata/history").readAsString().then((value) => File("$config/gamedata/history").writeAsString( '${maxID}\n$value'));
-      return "ok";
+      return true;
     }
     catch(e)
     {
-      return "error";
+      return false;
     }
 
+  }
+
+  removeGame({required int id, required context}) async
+  {
+    gameList = await getHistory();
+    Directory("$config/gamedata/${gameList[id][1]}").deleteSync(recursive: true);
+    await File("$config/gamedata/history").readAsString().then((value) => File("$config/gamedata/history").writeAsString(value.replaceAll('\n${gameList[id][1]}', '').replaceAll('${gameList[id][1]}\n', '')));
+    return;
   }
 
   editGame(id, name, description, command, top, bottom, backgroundPath, logoPath) async {
@@ -88,16 +106,11 @@ class GameController
 
     if (backgroundPath != "false")
     {
-      await File(backgroundPath).copySync("$config/gamedata/$id/background.png");
+      File(backgroundPath).copySync("$config/gamedata/$id/background.png");
     }
     if (logoPath != "false")
     {
-      await File(logoPath).copySync("$config/gamedata/$id/logo.png");
+      File(logoPath).copySync("$config/gamedata/$id/logo.png");
     }
   }
-
-  removeGame(id) async {
-    Directory("$config/gamedata/$id").deleteSync(recursive: true);
-  }
-
 }
